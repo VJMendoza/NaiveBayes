@@ -60,7 +60,7 @@ if __name__=="__main__":
     ham_or_spam_df.dropna(how='any', subset=['text'], inplace=True)
 
     # print(get_words(ham_or_spam_df.head(10)).columns)
-    get_words(ham_or_spam_df.head(10)).to_csv(os.path.join(base_dir, 'vocab.csv'))
+    get_words(ham_or_spam_df).to_csv(os.path.join(base_dir, 'vocab.csv'))
     # Get words
     # print(ham_or_spam_df.loc[125]['text'])
     # print(ham_or_spam_df.loc[125]['text'].decode('utf8').encode('ascii', 'ignore'))
