@@ -1,15 +1,22 @@
-import email, re, os, threading
+import email
+import re
+import os
+import threading
 import pandas as pd
 import numpy as np
 import mailparser
 
-base_dir = 'D:/Codes/DataSets/trec07p/'
+# Had to change directory of trec07p since it's too big to upload in repo
+# base_dir = 'D:/Codes/DataSets/trec07p/'
+base_dir = 'C:/Users/hrman/Downloads/trec07p/trec07p/'
 csv_name = 'processed_emails.csv'
 exitFlag = 0
+
 
 def extract_email_from_file(email_file):
     mail = mailparser.parse_from_file(email_file)
     return cleanhtml(mail.body).replace('\n', ' ').strip()
+
 
 def load_data_set(index):
     files = pd.read_csv(index, sep=' ', names=['ham_or_spam', 'email_name'])
@@ -33,8 +40,9 @@ def load_data_set(index):
     thread_3.join()
     thread_4.join()
     thread_5.join()
-    
-    frames = [thread_1.files, thread_2.files, thread_3.files, thread_4.files, thread_5.files]
+
+    frames = [thread_1.files, thread_2.files,
+              thread_3.files, thread_4.files, thread_5.files]
     result = pd.concat(frames)
     result.to_csv(os.path.join(base_dir, csv_name))
     # for index, row in sub_files[0].iterrows():
@@ -47,10 +55,12 @@ def load_data_set(index):
     # print(files.loc[list(range(0,100))])
     # print(sub_files[0])
 
+
 def cleanhtml(raw_html):
-  cleanr = re.compile('<.*?>')
-  cleantext = re.sub(cleanr, '', raw_html)
-  return cleantext
+    cleanr = re.compile('<.*?>')
+    cleantext = re.sub(cleanr, '', raw_html)
+    return cleantext
+
 
 class emailThread(threading.Thread):
     def __init__(self, thread_id, name, files):
@@ -58,7 +68,7 @@ class emailThread(threading.Thread):
         self.thread_id = thread_id
         self.name = name
         self.files = files
-    
+
     def run(self):
         print("Starting" + self.name)
         read_emails(self.name, self.files)
@@ -69,13 +79,15 @@ def read_emails(thread_name, email_frame):
     for index, row in email_frame.iterrows():
         print(row['email_name'])
         try:
-            email_frame.at[index, 'text'] = extract_email_from_file(os.path.join(base_dir, row['email_name']))
+            email_frame.at[index, 'text'] = extract_email_from_file(
+                os.path.join(base_dir, row['email_name']))
         except:
             email_frame.at[index, 'text'] = ''
             continue
-    
+
     if exitFlag:
         thread_name.exit()
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     load_data_set(os.path.join(base_dir, 'full/index'))
