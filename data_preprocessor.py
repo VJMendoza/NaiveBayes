@@ -60,4 +60,5 @@ if __name__ == "__main__":
     ham_or_spam_df['text'] = ham_or_spam_df['text'].apply(
         lambda x: ' '.join(x))
 
-    ham_or_spam_df.to_csv(os.path.join(base_dir, ''))
+    ham_or_spam_df.to_csv(os.path.join(
+        base_dir, 'ham_or_spam_preprocessed.csv'))
