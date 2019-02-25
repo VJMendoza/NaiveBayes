@@ -9,6 +9,7 @@ import mailparser
 # Had to change directory of trec07p since it's too big to upload in repo
 # base_dir = 'D:/Codes/DataSets/trec07p/'
 # base_dir = 'C:/Users/hrman/Downloads/trec07p/trec07p/'
+base_dir_processed = 'src/data/'
 csv_name = 'processed_emails.csv'
 exitFlag = 0
 
@@ -44,7 +45,7 @@ def load_data_set(index):
     frames = [thread_1.files, thread_2.files,
               thread_3.files, thread_4.files, thread_5.files]
     result = pd.concat(frames)
-    result.to_csv(os.path.join(base_dir, csv_name))
+    result.to_csv(os.path.join(base_dir_processed, csv_name))
     # for index, row in sub_files[0].iterrows():
     #     print(row['email_name'])
     #     try:
