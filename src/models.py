@@ -9,7 +9,7 @@ import os
 import numpy as np
 import pandas as pd
 
-base_dir = 'data/'
+base_dir = 'src/data/'
 csv_gv_name = 'ham_or_spam_preprocessed.csv'
 
 

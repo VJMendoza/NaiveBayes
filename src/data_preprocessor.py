@@ -10,7 +10,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from nltk.corpus import stopwords, words
 from bs4 import BeautifulSoup
 
-base_dir = 'data/'
+base_dir = 'src/data/'
 csv_name = 'processed_emails.csv'
 
 

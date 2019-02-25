@@ -8,7 +8,7 @@ import mailparser
 
 # Had to change directory of trec07p since it's too big to upload in repo
 # base_dir = 'D:/Codes/DataSets/trec07p/'
-base_dir = 'C:/Users/hrman/Downloads/trec07p/trec07p/'
+# base_dir = 'C:/Users/hrman/Downloads/trec07p/trec07p/'
 csv_name = 'processed_emails.csv'
 exitFlag = 0
 
